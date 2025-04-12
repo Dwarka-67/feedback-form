@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marriage & Women's Freedom - Opinion Form</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo img {
+      max-width: 200px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .description {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select,
+    textarea {
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .radio-group,
+    .checkbox-group {
+      margin-top: 10px;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+      font-weight: normal;
+      display: block;
+      margin: 5px 0;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .success-message {
+      margin-top: 15px;
+      color: green;
+      display: none;
+    }
+
+    .contact {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .contact h3 {
+      margin-bottom: 5px;
+    }
+
+    .contact p {
+      margin: 3px 0;
+    }
+
+    .contact a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="Uthista Harshitham (1).jpg" alt="Organization Logo">
+    </div>
+
+    <h2>Marriage & Women's Freedom - Share Your Opinion</h2>
+
+    <p class="description">
+      A girl's marriage is a life-stopper. When a girl gets married, she is put under many restrictions; she cannot achieve her goals and has to follow the orders of a man in her family. A girl loses her happiness with her marriage and lives under a man. A girl's life is put on hold right there.
+    </p>
+    <p><b>We will help you with your goals.</b></p>
+
+    <form>
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+
+      <label for="dob">Your Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="gender">Your Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="Female">Female</option>
+      </select>
+
+      <label>Do you think marriage limits a woman's freedom?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="limits" value="Yes" required> Yes</label>
+        <label><input type="radio" name="limits" value="No"> No</label>
+        <label><input type="radio" name="limits" value="Maybe"> Maybe</label>
+      </div>
+
+      <label>What challenges do women face after marriage? (Select all that apply)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="restrictions[]" value="Career restrictions"> Career restrictions</label>
+        <label><input type="checkbox" name="restrictions[]" value="Social pressure"> Social pressure</label>
+        <label><input type="checkbox" name="restrictions[]" value="Household duties"> Household duties</label>
+        <label><input type="checkbox" name="restrictions[]" value="No restrictions"> No restrictions</label>
+      </div>
+
+      <label for="changes">What changes should be made to improve women's freedom in marriage?</label>
+      <textarea id="changes" name="changes" rows="4" required></textarea>
+
+      <label for="dreams">What are your dreams & aspirations? (Things you wanted to achieve)</label>
+      <textarea id="dreams" name="dreams" rows="4" required></textarea>
+
+      <button type="submit">Submit</button>
+      <p class="success-message" id="successMessage">✅ Thanks for your response!</p>
+    </form>
+
+    <div class="contact">
+      <h3>Contact Us:</h3>
+      <p><strong>Harshitha Sanjeev Dwarka</strong></p>
+      <p>Research of Programming</p>
+      <p>📞 Cell No: 9110 360 767</p>
+      <p>📧 Email: <a href="mailto:hspvtltd1@gmail.com">hspvtltd1@gmail.com</a></p>
+    </div>
+  </div>
+
+  <script>
+    // 🔐 Your Firebase Config (make sure this is correct)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBbD13XWZb-SrLsBQOV-cuV-TjiqT9M7vY",
+      authDomain: "feedback-form-ea7d4.firebaseapp.com",
+      projectId: "feedback-form-ea7d4",
+      storageBucket: "feedback-form-ea7d4.appspot.com", // ✅ fixed this
+      messagingSenderId: "249190895356",
+      appId: "1:249190895356:web:110fe5f947635a79771179"
+    };
+
+    // 🔥 Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // 📩 Handle Form Submission
+    const form = document.querySelector("form");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = form.name.value;
+      const email = form.email.value;
+      const dob = form.dob.value;
+      const gender = form.gender.value;
+      const limits = form.limits.value;
+
+      const restrictions = [];
+      form.querySelectorAll("input[name='restrictions[]']:checked").forEach(cb => {
+        restrictions.push(cb.value);
+      });
+
+      const changes = form.changes.value;
+      const dreams = form.dreams.value;
+
+      try {
+        await db.collection("responses").add({
+          name,
+          email,
+          dob,
+          gender,
+          limits,
+          restrictions,
+          changes,
+          dreams,
+          submittedAt: new Date()
+        });
+
+        successMessage.style.display = "block";
+        form.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Optional: scroll to top
+      } catch (error) {
+        console.error("❌ Error:", error);
+        alert("Submission failed. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
